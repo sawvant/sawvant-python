@@ -5,7 +5,7 @@ description = "Sawvant Cutting Optimization API"
 authors = ["Sawvant <team@openapitools.org>"]
 license = "NoLicense"
 readme = "README.md"
-repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
+repository = "https://github.com/sawvant/sawvant-python"
 keywords = ["OpenAPI", "OpenAPI-Generator", "Sawvant Cutting Optimization API"]
 include = ["sawvant/py.typed"]
 
