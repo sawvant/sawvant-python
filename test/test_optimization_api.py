@@ -21,6 +21,13 @@ class TestOptimizationApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_create_batch_optimization(self) -> None:
+        """Test case for create_batch_optimization
+
+        Submit multiple cutting optimization jobs
+        """
+        pass
+
     def test_create_optimization(self) -> None:
         """Test case for create_optimization
 

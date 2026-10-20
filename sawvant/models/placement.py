@@ -24,11 +24,11 @@ class Placement(BaseModel):
     """ # noqa: E501
     part_id: StrictStr
     sheet_id: StrictStr = Field(description="Which sheet type this part is placed on")
-    x: Union[StrictFloat, StrictInt] = Field(description="mm from top-left of usable area")
-    y: Union[StrictFloat, StrictInt] = Field(description="mm from top-left of usable area")
-    width: Union[StrictFloat, StrictInt] = Field(description="Post-edge-banding dimension")
-    height: Union[StrictFloat, StrictInt] = Field(description="Post-edge-banding dimension")
-    rotated: StrictBool
+    x: Union[StrictFloat, StrictInt] = Field(description="mm from the top-left of the usable area, along the sheet's length axis. x + width never exceeds the usable length.")
+    y: Union[StrictFloat, StrictInt] = Field(description="mm from the top-left of the usable area, along the sheet's width axis. y + height never exceeds the usable width.")
+    width: Union[StrictFloat, StrictInt] = Field(description="Post-edge-banding dimension along the sheet's length axis")
+    height: Union[StrictFloat, StrictInt] = Field(description="Post-edge-banding dimension along the sheet's width axis")
+    rotated: StrictBool = Field(description="True when the part's length runs along the sheet's width axis, so width is the part's width and height is its length.")
     grain: GrainDirection
     __properties: ClassVar[List[str]] = ["part_id", "sheet_id", "x", "y", "width", "height", "rotated", "grain"]
 

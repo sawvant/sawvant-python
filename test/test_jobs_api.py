@@ -28,6 +28,20 @@ class TestJobsApi(unittest.TestCase):
         """
         pass
 
+    def test_get_job_diagram_pdf(self) -> None:
+        """Test case for get_job_diagram_pdf
+
+        Render a cutting plan as PDF
+        """
+        pass
+
+    def test_get_job_diagram_svg(self) -> None:
+        """Test case for get_job_diagram_svg
+
+        Render a cutting plan as SVG
+        """
+        pass
+
     def test_stream_job(self) -> None:
         """Test case for stream_job
 

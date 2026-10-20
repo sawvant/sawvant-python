@@ -62,24 +62,31 @@ with sawvant.ApiClient(configuration) as client:
 
 ## SSE Streaming
 
-Stream real-time progress events as the job runs:
+Stream real-time progress events as the job runs with `sawvant.streaming.stream_job`. The helper uses `httpx`, which is not installed with the SDK, so install it first:
+
+```sh
+pip install httpx
+```
+
+Then stream the events:
 
 ```python
-from sawvant.api import jobs_api
+from sawvant.streaming import stream_job
 
-with sawvant.ApiClient(configuration) as client:
-    api = jobs_api.JobsApi(client)
-
-    for event in api.stream_job(id=job.id):
-        if event.type == 'progress':
-            print('Progress:', event.data)
-        elif event.type == 'completed':
-            print('Done:', event.data)
-            break
-        elif event.type == 'failed':
-            print('Failed:', event.data)
-            break
+for event in stream_job(job.job_id, 'sk_your_api_key_here'):
+    if event.type == 'progress':
+        print('Progress:', event.data['progress'])
+    elif event.type == 'completed':
+        print('Done:', event.data['result'])
+        break
+    elif event.type == 'failed':
+        print('Failed:', event.data.get('error'))
+        break
 ```
+
+`stream_job` also accepts `base_url` (default `https://api.sawvant.com`) and `timeout` in seconds. `event.data` is a plain dict with the job fields.
+
+When a `completed` event arrives, the SDK fetches the full job via `GET /v1/jobs/{id}` and puts it in the event, so `event.data['result']` holds the complete result. The server leaves the result out of stream events to keep them small. Other events are passed on as received.
 
 ## Configuration
 

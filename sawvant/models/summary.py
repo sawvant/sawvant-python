@@ -27,7 +27,7 @@ class Summary(BaseModel):
     yield_percent: Union[Annotated[float, Field(le=100, strict=True, ge=0)], Annotated[int, Field(le=100, strict=True, ge=0)]]
     waste_percent: Union[StrictFloat, StrictInt]
     waste_area: Union[StrictFloat, StrictInt] = Field(description="mm²")
-    unplaced_parts: Optional[List[StrictStr]] = None
+    unplaced_parts: Optional[List[StrictStr]] = Field(default=None, description="IDs of parts the solver could not fit on any available sheet. A grain direction that forbids the only orientation that would fit is a common cause, alongside sheet quantity limits. The rest of the plan is still valid and cuttable.")
     sheets_used: List[SheetUsage]
     __properties: ClassVar[List[str]] = ["total_sheets", "yield_percent", "waste_percent", "waste_area", "unplaced_parts", "sheets_used"]
 
