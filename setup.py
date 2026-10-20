@@ -7,14 +7,10 @@ File generated from our OpenAPI spec; DO NOT EDIT.
 """  # noqa: E501
 
 
+from pathlib import Path
+
 from setuptools import setup, find_packages  # noqa: H301
 
-# To install the library, run the following
-#
-# python setup.py install
-#
-# prerequisite: setuptools
-# http://pypi.python.org/pypi/setuptools
 NAME = "sawvant"
 VERSION = "0.1.0"
 PYTHON_REQUIRES = ">= 3.8"
@@ -24,21 +20,29 @@ REQUIRES = [
     "pydantic >= 2",
     "typing-extensions >= 4.7.1",
 ]
+EXTRAS_REQUIRE = {
+    # sawvant.streaming uses httpx: pip install "sawvant[streaming]"
+    "streaming": ["httpx >= 0.24"],
+}
 
 setup(
     name=NAME,
     version=VERSION,
-    description="Sawvant Cutting Optimization API",
+    description="Python SDK for the Sawvant cutting optimization API",
     author="Sawvant",
-    author_email="team@openapitools.org",
-    url="",
-    keywords=["OpenAPI", "OpenAPI-Generator", "Sawvant Cutting Optimization API"],
+    url="https://sawvant.com",
+    project_urls={
+        "Source": "https://github.com/sawvant/sawvant-python",
+        "Documentation": "https://sawvant.com/docs",
+    },
+    license="Apache-2.0",
+    keywords=["sawvant", "cutting optimization", "sdk"],
+    python_requires=PYTHON_REQUIRES,
     install_requires=REQUIRES,
+    extras_require=EXTRAS_REQUIRE,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
-    long_description_content_type='text/markdown',
-    long_description="""\
-    REST API for 2D guillotine sheet cutting optimization. Submit optimization jobs, poll for status, or stream progress via SSE. 
-    """,  # noqa: E501
+    long_description=(Path(__file__).parent / "README.md").read_text(encoding="utf-8"),
+    long_description_content_type="text/markdown",
     package_data={"sawvant": ["py.typed"]},
 )

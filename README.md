@@ -62,10 +62,10 @@ with sawvant.ApiClient(configuration) as client:
 
 ## SSE Streaming
 
-Stream real-time progress events as the job runs with `sawvant.streaming.stream_job`. The helper uses `httpx`, which is not installed with the SDK, so install it first:
+Stream real-time progress events as the job runs with `sawvant.streaming.stream_job`. The helper uses `httpx`, so install the SDK with the `streaming` extra:
 
 ```sh
-pip install httpx
+pip install "sawvant[streaming]"
 ```
 
 Then stream the events:
